@@ -1,12 +1,12 @@
 {% extends "mv_test/base.html" %}
 
 {% block content %}
-    <h1>Test Results</h1>
+    <h1>Test Results <small>for: {{ group }}</small></h1>
     
     {% for g in group.data %}
-        <h3>{{ group }} <small>Goal: {{ g.goal }}</small></h3>
+        <h3><small>Goal: </small>{{ g.goal }}</h3>
         
-        <div class='row-fluid'>
+        <div class='row'>
             <div class='col-md-6'>
                 <figure style="width: 100%; height: 300px;" id="chart_{{ g.goal }}"></figure>
             </div>
