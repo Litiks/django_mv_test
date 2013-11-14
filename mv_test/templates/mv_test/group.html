@@ -1,0 +1,57 @@
+{% extends "mv_test/base.html" %}
+
+{% block content %}
+    <h1>Test Results</h1>
+    
+    {% for g in group.data %}
+        <h3>{{ group }} <small>Goal: {{ g.goal }}</small></h3>
+        
+        <div class='row-fluid'>
+            <div class='col-md-6'>
+                <figure style="width: 100%; height: 300px;" id="chart_{{ g.goal }}"></figure>
+            </div>
+            <div class='col-md-6'>
+                <table class='table table-bordered table-striped'>
+                    <thead>
+                        <tr>
+                            <th>Variation</th>
+                            <th>Wins</th>
+                            <th>Total</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    {% for score in g.scores %}
+                        <tr>
+                            <td>{{ score.variation }}</td>
+                            <td>{{ score.wins }}</td>
+                            <td>{{ score.total }}</td>
+                            <td>{{ score.score }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    
+        <script>
+            data = {
+              xScale: "ordinal",
+              yScale: "linear",
+              yMin: 0,
+              type: "bar",
+              main: [{
+                className: '.score',
+                data: [
+                    {% for score in g.scores %}
+                        {
+                            x: "{{ score.variation }}",
+                            y: {{ score.score }}
+                        }{% if not forloop.last %},{% endif %}
+                    {% endfor %}
+                ]
+              }]
+            }
+            var myChart = new xChart('bar', data, '#chart_{{ g.goal }}');
+        </script>
+    {% endfor %}
+    
+{% endblock %}

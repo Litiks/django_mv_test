@@ -1,0 +1,11 @@
+{% extends "mv_test/base.html" %}
+
+{% block content %}
+    <h1>Test Results</h1>
+    
+    <ul>
+        {% for group in groups %}
+            <li><a href='{% url "mv_test-group" group.id %}'>{{ group }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
