@@ -6,29 +6,33 @@ Dead simple multivariate testing app for django, with no dependancies.
 Setup
 -----
 
-Add to Installed Apps::
+1.Add to Installed Apps::
 
     INSTALLED_APPS += (
         'mv_test',
     )
     
-Add to Middleware Classes::
+2.Add to Middleware Classes::
 
     MIDDLEWARE_CLASSES += (
         'mv_test.middleware.MVMiddleware',
     )
 
-Add to Template Context Processors::
+3.Add to Template Context Processors::
 
     TEMPLATE_CONTEXT_PROCESSORS += (
         "mv_test.context.mv_test",
     )
 
-Add to your urls.py::
+4.Add to your urls.py::
 
     urlpatterns += patterns('',
         url(r'^mv_test/', include('mv_test.urls')),
     )
+    
+5.Sync/Migrate::
+
+    python manage.py migrate mv_test
 
     
 Usage
