@@ -14,7 +14,7 @@ class MVMiddleware(object):
                 else:
                     profile = MVProfile.objects.new()
                 profile.user = request.user
-                profile.user_agent = request.META['HTTP_USER_AGENT']
+                profile.user_agent = request.META.get('HTTP_USER_AGENT')
                 profile.save()
         else:
             #get or create a profile for this visitor
@@ -22,7 +22,7 @@ class MVMiddleware(object):
                 profile = MVProfile.objects.get(id = request.session['mv_profile_id'])
             else:
                 profile = MVProfile.objects.new()
-                profile.user_agent = request.META['HTTP_USER_AGENT']
+                profile.user_agent = request.META.get('HTTP_USER_AGENT')
                 profile.save()
                 
         request.mv_profile = profile
